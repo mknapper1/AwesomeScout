@@ -29,17 +29,8 @@ def add_match(request):
     if request.method == 'POST':
         form = MatchForm(request.POST)
         if form.is_valid():
-            for chunk in request.FILES['file'].chunks():
-                arr = str(chunk).split(',')
-                for i in range(0, len(arr), 2):
-                    # lazy hack
-                    if arr[i][0] == 'b':
-                        arr[i] = arr[i][2:]
-                    robot = Robot(number=int(arr[i]), name=arr[i + 1], slug=slugify(arr[i + 1]))
-                    robot.save()
-                    print(robot)
-
-            return JsonResponse({'status': 'ok'})
+            form.save()
+            form = MatchForm()
     else:
         form = MatchForm()
     return render(request, 'scout/form.html', {'form': form})
@@ -50,17 +41,8 @@ def add_pit(request):
     if request.method == 'POST':
         form = PitForm(request.POST)
         if form.is_valid():
-            for chunk in request.FILES['file'].chunks():
-                arr = str(chunk).split(',')
-                for i in range(0, len(arr), 2):
-                    # lazy hack
-                    if arr[i][0] == 'b':
-                        arr[i] = arr[i][2:]
-                    robot = Robot(number=int(arr[i]), name=arr[i + 1], slug=slugify(arr[i + 1]))
-                    robot.save()
-                    print(robot)
-
-            return JsonResponse({'status': 'ok'})
+            form.save()
+            form = PitForm()
     else:
         form = PitForm()
     return render(request, 'scout/form.html', {'form': form})
