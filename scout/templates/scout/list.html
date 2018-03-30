@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Form{% endblock title %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      {% for robot in robots %}
+        <h2>{{ robot }}</h2>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

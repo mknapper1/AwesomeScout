@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Robot, Pit, Match
+
+
+admin.site.register(Robot)
+admin.site.register(Pit)
+admin.site.register(Match)

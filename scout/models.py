@@ -6,13 +6,21 @@ class Robot(models.Model):
     name = models.CharField(max_length=255)
     slug = models.CharField(max_length=255)
 
+    def __str__(self):
+        return str(self.number) + ' | ' + self.name
+
 
 class Pit(models.Model):
+    robot = models.ForeignKey(Robot, on_delete=models.CASCADE, null=True)
+    line_auto = models.BooleanField(default=False)
+    switch_auto = models.BooleanField(default=False)
+    scale_auto = models.BooleanField(default=False)
     autonomous = models.IntegerField(default=0)
-    climb = models.IntegerField(default=0)
+    climbing = models.IntegerField(default=0)
     switch = models.IntegerField(default=0)
     scale = models.IntegerField(default=0)
     vault = models.IntegerField(default=0)
+    overall_impression = models.IntegerField(default=0)
     notes = models.TextField(blank=True, null=True)
 
 
@@ -26,8 +34,6 @@ class Match(models.Model):
     )
 
     # team number - number
-    team_number = models.IntegerField(default=0)
-
     robot = models.ForeignKey(Robot, on_delete=models.CASCADE, null=True)
 
     match_number = models.CharField(max_length=200)
