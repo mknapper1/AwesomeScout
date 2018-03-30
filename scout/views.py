@@ -76,6 +76,11 @@ def add_external(request):
             for data in scout:
                 name = data['name']
                 value = data['value']
+                if name == 'scout_type':
+                    if value == 'match':
+                        Match.create_match(scout)
+                    if value == 'pit':
+                        Pit.create_pit(scout)
             return JsonResponse({'status': 'ok'})
     return JsonResponse({'status': 'error'})
 

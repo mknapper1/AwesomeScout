@@ -23,6 +23,34 @@ class Pit(models.Model):
     overall_impression = models.IntegerField(default=0)
     notes = models.TextField(blank=True, null=True)
 
+    @classmethod
+    def create_pit(cls, scout):
+        new_pit = Pit()
+        for data in scout:
+            if data['name'] == 'robot':
+                new_pit.robot_id = data['value']
+            if data['name'] == 'line_auto':
+                new_pit.line_auto = data['value']
+            if data['name'] == 'switch_auto':
+                new_pit.switch_auto = data['value']
+            if data['name'] == 'scale_auto':
+                new_pit.scale_auto = data['value']
+            if data['name'] == 'autonomous':
+                new_pit.autonomous = data['value']
+            if data['name'] == 'climbing':
+                new_pit.climbing = data['value']
+            if data['name'] == 'switch':
+                new_pit.switch = data['value']
+            if data['name'] == 'scale':
+                new_pit.scale = data['value']
+            if data['name'] == 'vault':
+                new_pit.vault = data['value']
+            if data['name'] == 'overall_impression':
+                new_pit.overall_impression = data['value']
+            if data['name'] == 'notes':
+                new_pit.notes = data['value']
+        new_pit.save()
+
 
 class Match(models.Model):
     auto_choices = (
@@ -91,10 +119,48 @@ class Match(models.Model):
     scouter_name = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
-        return str(self.team_number) + " - match " + str(self.match_number)
+        return str(self.robot.number) + " - match " + str(self.match_number)
 
     @classmethod
-    def stringToObject(cls, string):
+    def create_match(cls, scout):
+        new_match = Match()
+        for data in scout:
+            if data['name'] == 'match_number' :
+                new_match.match_number = data['value']
+            if data['name'] == 'robot':
+                new_match.robot_id = data['value']
+            if data['name'] == 'auton':
+                new_match.auton = data['value']
+            if data['name'] == 'auton_cubes':
+                new_match.auto_cubes = data['value']
+            if data['name'] == 'auton_notes':
+                new_match.auto_notes = data['value']
+            if data['name'] == 'own_switch_cubes':
+                new_match.own_switch_cubes = data['value']
+            if data['name'] == 'other_switch_cubes':
+                new_match.other_switch_cubes = data['value']
+            if data['name'] == 'scale_cubes':
+                new_match.scale_cubes = data['value']
+            if data['name'] == 'vault_cubes':
+                new_match.vault_cubes = data['value']
+            if data['name'] == 'tele_notes':
+                new_match.tele_notes = data['value']
+            if data['name'] == 'can_climb':
+                new_match.can_climb = data['valiue']
+            if data['name'] == 'buddy_climb':
+                new_match.buddy_climb = data['value']
+            if data['name'] == 'robot_cube_intake':
+                new_match.robot_cube_intake = data['value']
+            if data['name'] == "robot_cube_holding":
+                new_match.robot_cube_holding = data['value']
+            if data['name'] == 'robot_cube_placing':
+                new_match.robot_cube_placing = data['value']
+            if data['name'] == 'other_notes':
+                new_match.other_notes = data['value']
+            if data['name'] == 'scouter_name':
+                new_match.scouter_name = data['value']
+        new_match.save()
+
         string = '[{"name":"team_number","value":"333"},' \
                  + '{"name":"match_number","value":"010"}]' \
                  + '{"name":"auton","value":"?????????????????????????????????????????????"}]' \
