@@ -18,7 +18,7 @@ class PitForm(forms.ModelForm):
 class MatchForm(forms.ModelForm):
     class Meta:
         model = Match
-        fields = '__all__'
+        exclude = ['saturday']
         labels = {
             "scale_cubes": "Scale Cubes",
             "robot_speed" : "Robot Speed (rank from 1 to 10)",

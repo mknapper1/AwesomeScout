@@ -11,7 +11,7 @@ class MatchAdmin(admin.ModelAdmin):
                     'own_switch_cubes',
                     'other_switch_cubes',
                     'can_climb')
-    list_filter = ('robot', 'match_number')
+    list_filter = ('robot', 'match_number', 'saturday')
 
 
 admin.site.register(Robot)
