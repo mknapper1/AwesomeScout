@@ -6,9 +6,57 @@
 {% block content %}
   <div class="row">
     <div class="col-md-6 offset-md-3">
-      {% for robot in robots %}
-        <h2>{{ robot }}</h2>
-      {% endfor %}
+      <table id="table_id" class="display">
+        <thead>
+        {#         list_display = ('robot',#}
+        {#                    'match_number',#}
+        {#                    'scale_cubes',#}
+        {#                    'vault_cubes',#}
+        {#                    'own_switch_cubes',#}
+        {#                    'other_switch_cubes',#}
+        {#                    'can_climb',#}
+        {#                    'auton')#}
+        <tr>
+          <th>Team number</th>
+          <th>Team name</th>
+          <th>Scale cubes</th>
+          <th>Vault cubes</th>
+          <th>Own switch cubes</th>
+          <th>Other switch cubes</th>
+          <th>Climb</th>
+          <th>Auton</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for robot in robots %}
+          <tr>
+            <td>{{ robot.number }}</td>
+            <td>{{ robot.name }}</td>
+            <td>{{ robot.get_avg_scale_cubes }}</td>
+            <td>{{ robot.get_avg_vault_cubes }}</td>
+            <td>{{ robot.get_avg_switch_cubes }}</td>
+            <td>{{ robot.get_avg_other_switch_cubes }}</td>
+            <td>{{ robot.get_can_climb }}</td>
+            <td>{{ robot.get_auton_list }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+
     </div>
   </div>
 {% endblock %}
+
+
+{% block my_js %}
+  <script type="text/javascript">
+
+
+    $(document).ready(function () {
+      $('#table_id').DataTable();
+    });
+
+
+  </script>
+{% endblock my_js %}

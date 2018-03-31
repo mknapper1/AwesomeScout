@@ -6,6 +6,78 @@ class Robot(models.Model):
     name = models.CharField(max_length=255)
     slug = models.CharField(max_length=255)
 
+
+    def get_avg_scale_cubes(self):
+        total_cubes = 0
+        match_count = 0
+        for match in self.match_data.all():
+            total_cubes += match.scale_cubes
+            match_count += 1
+        return total_cubes / max(match_count,1)
+
+    def get_avg_vault_cubes (self):
+        total_cubes = 0
+        match_count = 0
+        for match in self.match_data.all():
+            total_cubes += match.vault_cubes
+            match_count += 1
+        return total_cubes / max(match_count,1)
+
+    def get_avg_switch_cubes (self):
+        total_cubes = 0
+        match_count = 0
+        for match in self.match_data.all():
+            total_cubes += match.own_switch_cubes
+            match_count += 1
+        return total_cubes / max(match_count, 1)
+
+    def get_avg_other_switch_cubes(self):
+        total_cubes = 0
+        match_count = 0
+        for match in self.match_data.all():
+            total_cubes += match.other_switch_cubes
+            match_count += 1
+        return total_cubes / max(match_count, 1)
+
+    def get_can_climb(self):
+        for match in self.match_data.all():
+            if match.can_climb:
+                return True
+        return False
+
+    def get_auton_list(self):
+        auto_choices = (
+            ('None', 'None'),
+            ('Baseline', 'Baseline'),
+            ('CenterSwitch', 'Center Switch'),
+            ('SideSwitch', 'Side Switch'),
+            ('Scale', 'Scale')
+        )
+        none_auto = False
+        baseline = False
+        center_switch = False
+        side_switch = False
+        scale = False
+        return_string = ''
+        for match in self.match_data.all():
+            if match.auton == 'None' and not none_auto:
+                none_auto = True
+                return_string += 'None '
+            if match.auton == 'Baseline' and not baseline:
+                baseline = True
+                return_string += 'Baseline '
+            if match.auton == 'CenterSwitch' and not center_switch:
+                center_switch = True
+                return_string += 'Center Switch '
+            if match.auton == 'SideSwitch' and not side_switch:
+                side_switch = True
+                return_string += 'Side Switch '
+            if match.auton == 'Scale' and not scale:
+                scale = True
+                return_string += 'Scale '
+        return return_string
+
+
     def __str__(self):
         return str(self.number) + ' | ' + self.name
 
@@ -62,7 +134,7 @@ class Match(models.Model):
     )
 
     # team number - number
-    robot = models.ForeignKey(Robot, on_delete=models.CASCADE, null=True)
+    robot = models.ForeignKey(Robot, on_delete=models.CASCADE, null=True, related_name='match_data')
 
     match_number = models.CharField(max_length=200)
 

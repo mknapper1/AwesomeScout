@@ -10,7 +10,8 @@ class MatchAdmin(admin.ModelAdmin):
                     'vault_cubes',
                     'own_switch_cubes',
                     'other_switch_cubes',
-                    'can_climb')
+                    'can_climb',
+                    'auton')
     list_filter = ('robot', 'match_number', 'saturday')
 
 

@@ -8,6 +8,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+
+
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -45,6 +48,12 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'scout:add_pit' %}">Scout Pit</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'scout:rank' %}">Rank</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'scout:rank_saturday' %}">Saturday Rank</a>
             </li>
 {#            {% if request.user.is_authenticated %}#}
 {#              <li class="nav-item">#}
@@ -99,6 +108,7 @@
 
       <!-- Your stuff: Third-party javascript libraries go here -->
 
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
 
       <!-- place project specific Javascript in this file -->
 
@@ -106,6 +116,10 @@
 
 
     {% endblock javascript %}
+
+    {% block my_js %}
+
+    {% endblock my_js %}
   </body>
 </html>
 
