@@ -32,10 +32,10 @@
           <tr>
             <td>{{ robot.number }}</td>
             <td>{{ robot.name }}</td>
-            <td>{{ robot.get_avg_scale_cubes }}</td>
-            <td>{{ robot.get_avg_vault_cubes }}</td>
-            <td>{{ robot.get_avg_switch_cubes }}</td>
-            <td>{{ robot.get_avg_other_switch_cubes }}</td>
+            <td>{{ robot.get_avg_scale_cubes|floatformat:2 }}</td>
+            <td>{{ robot.get_avg_vault_cubes|floatformat:2 }}</td>
+            <td>{{ robot.get_avg_switch_cubes|floatformat:2 }}</td>
+            <td>{{ robot.get_avg_other_switch_cubes|floatformat:2 }}</td>
             <td>{{ robot.get_can_climb }}</td>
             <td>{{ robot.get_auton_list }}</td>
           </tr>
