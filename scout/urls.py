@@ -10,5 +10,6 @@ urlpatterns = [
     path('add/external/', views.add_external),
     path('list/', views.list_robots, name='list'),
     path('rank/', views.rank_robots, name='rank'),
+    path('util/tally-to-count', views.tally_to_count, name='tally-to-count'),
     # path('robot/<int:id>/', views.robot),
 ]

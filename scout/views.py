@@ -94,3 +94,19 @@ def rank_robots(request):
     return JsonResponse("Hello, world. You're at the polls index.")
     # return render(request, 'scouter/birdseyeview.html', {'my_surveys': my_surveys})
 
+
+def tally_to_count(request):
+    matches = Match.objects.all()
+    for match in matches:
+        if str(match.scale_cubes)[0] == '1':
+            match.scale_cubes = len(str(match.scale_cubes))
+        if str(match.vault_cubes)[0] == '1':
+            match.vault_cubes = len(str(match.vault_cubes))
+        if str(match.own_switch_cubes)[0] == '1':
+            match.own_switch_cubes = len(str(match.own_switch_cubes))
+        if str(match.other_switch_cubes)[0] == '1':
+            match.other_switch_cubes = len(str(match.other_switch_cubes))
+        match.save()
+    return JsonResponse({"Status":"Done!"})
+
+
