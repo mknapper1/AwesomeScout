@@ -8,9 +8,7 @@ class MatchAdmin(admin.ModelAdmin):
                     'match_number',
                     'scale_cubes',
                     'vault_cubes',
-                    'can_climb',
-                    'created',
-                    'updated')
+                    'can_climb')
     list_filter = ('robot', 'match_number')
 
 
