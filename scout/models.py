@@ -66,7 +66,7 @@ class Match(models.Model):
 
     match_number = models.CharField(max_length=200)
 
-    saturday = models.BooleanField(default=False)
+    saturday = models.BooleanField(default=True)
 
     # Auton - selectable list(None, Baseline, Center switch, side switch, scale)
     auton = models.CharField(
