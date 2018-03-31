@@ -3,7 +3,7 @@ from django.contrib import admin
 from .models import Robot, Pit, Match
 
 
-class RobotAdmin(admin.ModelAdmin):
+class MatchAdmin(admin.ModelAdmin):
     list_display = ('robot',
                     'match_number',
                     'scale_cubes',
@@ -14,6 +14,6 @@ class RobotAdmin(admin.ModelAdmin):
     list_filter = ('robot', 'match_number')
 
 
-admin.site.register(Robot, RobotAdmin)
+admin.site.register(Robot)
 admin.site.register(Pit)
-admin.site.register(Match)
+admin.site.register(Match, MatchAdmin)
