@@ -86,23 +86,15 @@ def add_external(request):
 
 
 def list_robots(request):
-    robots = Robot.objects.filter(match_data__isnull=False)
+    robots = Robot.objects.filter(match_data__isnull=False).distinct()
     return render(request, 'scout/list.html', {'robots': robots})
 # return render(request, 'scouter/birdseyeview.html', {'my_surveys': my_surveys})
 
 
 def list_saturday_robots(request):
-    robots = Robot.objects.filter(match_data__saturday=True)
+    robots = Robot.objects.filter(match_data__saturday=True).distinct()
     return render(request, 'scout/list.html', {'robots': robots})
 
-
-def rank_robots(request):
-    robots = Robot.objects.all()
-    matches = Match.objects.all()
-    pits = Pit.objects.all()
-    return render(request, 'scout/form.html', {'robots': robots,
-                                               'matches': matches,
-                                               'pits': pits})
 
 def tally_to_count(request):
     matches = Match.objects.all()
